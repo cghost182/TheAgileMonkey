@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct Artist: Codable {
+struct ArtistResponse: Codable {
     let resultCount: Int?
-    let results: [ArtistResult]?
+    let results: [Artist]?
 }
 
-struct ArtistResult: Codable {
+struct Artist: Codable {
     let artistId: Int32?
     let artistName: String?
     let primaryGenreName: String?

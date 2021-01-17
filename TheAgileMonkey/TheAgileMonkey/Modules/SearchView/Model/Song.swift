@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct Song: Codable {
+struct SongResponse: Codable {
     let resultCount: Int?
-    let results: [SongResult]?
+    let results: [Song]?
 }
 
-struct SongResult: Codable {
+struct Song: Codable {
     let wrapperType: String?
     let trackId: Int32?
     let trackName: String?
