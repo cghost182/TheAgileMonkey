@@ -23,7 +23,7 @@ class SearchArtistViewController: UIViewController {
     var searchController: UISearchController?
     private var isLoading: Bool = false
     
-    //MARK: - Life cycle
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,7 +36,7 @@ class SearchArtistViewController: UIViewController {
         presenter?.updateView()
     }
     
-    func configureView() {
+    private func configureView() {
         title = Constants.title
         emptyListLabel.isHidden = false
         
@@ -59,11 +59,6 @@ class SearchArtistViewController: UIViewController {
         searchController?.searchBar.placeholder = Constants.searchPlaceholder
         
         navigationItem.searchController = searchController
-    }
-    
-    // MARK: - IBActions
-    @IBAction func findButtonTapped(_ sender: Any) {
-        presenter?.searchArtistByName("Linkin")
     }
 }
 
@@ -95,6 +90,11 @@ extension SearchArtistViewController: UITableViewDataSource {
 extension SearchArtistViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return Constants.cellHeight
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let artist = presenter?.artistList[indexPath.row]
+        presenter?.navigateToAlbumsView(with: artist)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

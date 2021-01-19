@@ -26,7 +26,7 @@ class SearchArtistInteractor: SearchArtistInteractorInput {
     }
     
     func searchAtistAlbums(artistId: Int32) {
-        networkManager?.findAlbums(page: 0, artistId: artistId, completion: { [weak self] (data) in
+        networkManager?.findAlbums(artistId: artistId, completion: { [weak self] (data) in
             do {
                 let artistsResponse = try JSONDecoder().decode(AlbumResponse.self, from: data)
                 if let responseCount = artistsResponse.resultCount, responseCount > 0 {

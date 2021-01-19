@@ -5,8 +5,8 @@ private let SearchArtistStoryboard = "SearchArtist"
 private let SearchArtistViewControllerIdentifier = "SearchArtistViewController"
 
 protocol SearchArtistWireframing {
-    
-    static func createSearchArtist() -> SearchArtistViewController 
+    static func createSearchArtist() -> SearchArtistViewController
+    func navigateToAlbumsView(with artist: Artist?)
 }
 
 class SearchArtistWireframe {
@@ -59,5 +59,9 @@ extension SearchArtistWireframe: SearchArtistWireframing {
     
     //MARK: Presentation Methods (called by this module)
     
+    func navigateToAlbumsView(with artist: Artist?) {
+        let albumsViewController = AlbumsWireframe.createAlbums(with: artist)
+        viewController?.navigationController?.pushViewController(albumsViewController, animated: true)
+    }
     
 }

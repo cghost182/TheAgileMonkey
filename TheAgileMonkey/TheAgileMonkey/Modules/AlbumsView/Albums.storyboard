@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Albums View Controller-->
+        <scene sceneID="xqv-7p-Itg">
+            <objects>
+                <viewController storyboardIdentifier="AlbumsViewController" id="792-6K-a7m" customClass="AlbumsViewController" customModule="TheAgileMonkey" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="t1P-wf-fER"/>
+                        <viewControllerLayoutGuide type="bottom" id="Qdt-cm-2il"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ESo-bE-oz8">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="k03-OL-MWF">
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AlbumTableViewCell" rowHeight="92" id="XMl-Kc-jEr" customClass="AlbumTableViewCell" customModule="TheAgileMonkey" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="92"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XMl-Kc-jEr" id="c10-3f-9sh">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="92"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sKy-no-aJX">
+                                                    <rect key="frame" x="15" y="5" width="60" height="82"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="60" id="0nO-v2-eIZ"/>
+                                                        <constraint firstAttribute="height" constant="60" id="aK6-hB-0pR"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Tb6-gQ-2ar">
+                                                    <rect key="frame" x="85" y="5" width="319" height="82"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Album name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BJG-Pa-3Nf">
+                                                            <rect key="frame" x="0.0" y="0.0" width="319" height="41"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DD/MM/YYYY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kat-tJ-hFM">
+                                                            <rect key="frame" x="0.0" y="41" width="319" height="41"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                            <color key="textColor" red="0.70939928760000004" green="0.43151917049999999" blue="0.12806995030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="Kat-tJ-hFM" firstAttribute="height" secondItem="BJG-Pa-3Nf" secondAttribute="height" id="LAN-As-6Je"/>
+                                                    </constraints>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="sKy-no-aJX" firstAttribute="top" secondItem="c10-3f-9sh" secondAttribute="top" constant="5" id="0Ng-ow-Rpl"/>
+                                                <constraint firstItem="Tb6-gQ-2ar" firstAttribute="leading" secondItem="sKy-no-aJX" secondAttribute="trailing" constant="10" id="0r3-NH-mQM"/>
+                                                <constraint firstAttribute="bottom" secondItem="Tb6-gQ-2ar" secondAttribute="bottom" constant="5" id="8Id-og-Kf3"/>
+                                                <constraint firstItem="sKy-no-aJX" firstAttribute="leading" secondItem="c10-3f-9sh" secondAttribute="leading" constant="15" id="G23-f4-BGf"/>
+                                                <constraint firstItem="Tb6-gQ-2ar" firstAttribute="top" secondItem="c10-3f-9sh" secondAttribute="top" constant="5" id="Hoc-kn-INz"/>
+                                                <constraint firstAttribute="bottom" secondItem="sKy-no-aJX" secondAttribute="bottom" constant="5" id="j90-Fn-B4z"/>
+                                                <constraint firstAttribute="trailing" secondItem="Tb6-gQ-2ar" secondAttribute="trailing" constant="10" id="qNe-uY-fjQ"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="albumImageView" destination="sKy-no-aJX" id="9oi-XJ-viN"/>
+                                            <outlet property="albumNameLabel" destination="BJG-Pa-3Nf" id="2af-bn-ZJ7"/>
+                                            <outlet property="releaseDateLabel" destination="Kat-tJ-hFM" id="ysa-aa-qGh"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We couldn't find any album for this artist!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jse-MZ-lnB">
+                                <rect key="frame" x="35" y="438" width="344" height="20.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" red="0.83137254900000002" green="0.0" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Jse-MZ-lnB" firstAttribute="centerX" secondItem="ESo-bE-oz8" secondAttribute="centerX" id="049-YZ-472"/>
+                            <constraint firstItem="Jse-MZ-lnB" firstAttribute="leading" secondItem="ESo-bE-oz8" secondAttribute="leadingMargin" constant="15" id="0aQ-GS-NwJ"/>
+                            <constraint firstAttribute="bottom" secondItem="k03-OL-MWF" secondAttribute="bottom" id="0ba-I7-M1H"/>
+                            <constraint firstAttribute="trailing" secondItem="k03-OL-MWF" secondAttribute="trailing" id="Hqi-6d-wqI"/>
+                            <constraint firstItem="k03-OL-MWF" firstAttribute="top" secondItem="t1P-wf-fER" secondAttribute="bottom" id="IE4-wr-mil"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Jse-MZ-lnB" secondAttribute="trailing" constant="15" id="OgD-im-P1T"/>
+                            <constraint firstItem="k03-OL-MWF" firstAttribute="leading" secondItem="ESo-bE-oz8" secondAttribute="leading" id="UIX-3b-UW7"/>
+                            <constraint firstItem="Jse-MZ-lnB" firstAttribute="centerY" secondItem="ESo-bE-oz8" secondAttribute="centerY" id="Z5k-WO-eVm"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="albumTableView" destination="k03-OL-MWF" id="a82-q8-gbN"/>
+                        <outlet property="errorLabel" destination="Jse-MZ-lnB" id="Xb6-6y-amL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HKE-8A-c8Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="547.82608695652175" y="212.94642857142856"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

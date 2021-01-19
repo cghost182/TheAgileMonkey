@@ -6,6 +6,7 @@ protocol SearchArtistPresenterInput: class {
     func searchArtistByName(_ name: String)
     func resetArtistList()
     func loadMoreArtists()
+    func navigateToAlbumsView(with artist: Artist?)
 }
 
 class SearchArtistPresenter: SearchArtistPresenterInput {
@@ -36,6 +37,10 @@ class SearchArtistPresenter: SearchArtistPresenterInput {
     func loadMoreArtists() {
         page += 1
         interactor?.searchArtistByName(searchText, page: page)
+    }
+    
+    func navigateToAlbumsView(with artist: Artist?) {
+        wireframe?.navigateToAlbumsView(with: artist)
     }
 }
 
