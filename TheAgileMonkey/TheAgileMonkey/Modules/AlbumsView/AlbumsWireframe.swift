@@ -6,6 +6,7 @@ private let AlbumsViewControllerIdentifier = "AlbumsViewController"
 
 protocol AlbumsWireframing {
     static func createAlbums(with artist: Artist?) -> AlbumsViewController
+    func navigateToSongsView(with album: Album?)
 }
 
 class AlbumsWireframe {
@@ -60,5 +61,8 @@ extension AlbumsWireframe: AlbumsWireframing {
     
     //MARK: Presentation Methods (called by this module)
     
-    
+    func navigateToSongsView(with album: Album?) {
+        let songsViewController = SongsWireframe.createSongs(with: album)
+        viewController?.navigationController?.pushViewController(songsViewController, animated: true)
+    }
 }

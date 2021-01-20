@@ -48,6 +48,7 @@ extension SearchArtistPresenter: SearchArtistInteractorOutput {
     func artistsFetched(_ artistListFetched: [Artist]?) {
         guard let artistListFetched = artistListFetched,
               artistListFetched.count > 0 else {
+            view?.showError()
             return
         }
         
@@ -58,5 +59,9 @@ extension SearchArtistPresenter: SearchArtistInteractorOutput {
         }
         
         view?.showResults()
+    }
+    
+    func artistNotFound() {
+        view?.showError()
     }
 }

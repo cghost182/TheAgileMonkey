@@ -5,6 +5,7 @@ protocol AlbumsPresenterInput: class {
     func updateView()
     func handleIncoming(artist: Artist?)
     func getArtistName() -> String?
+    func navigateToSongsView(with album: Album?)
 }
 
 class AlbumsPresenter: AlbumsPresenterInput {
@@ -25,6 +26,10 @@ class AlbumsPresenter: AlbumsPresenterInput {
     
     func getArtistName() -> String? {
         return artist?.artistName
+    }
+    
+    func navigateToSongsView(with album: Album?) {
+        wireframe?.navigateToSongsView(with: album)
     }
 }
 

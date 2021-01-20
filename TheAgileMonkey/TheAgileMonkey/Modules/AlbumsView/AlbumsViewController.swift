@@ -34,6 +34,7 @@ class AlbumsViewController: UIViewController {
     }
     
     private func configureView() {
+        title = self.presenter?.getArtistName()
         setupTableView()
         setupBackButton()
         setupErrorLabel(isHidden: true)
@@ -41,6 +42,7 @@ class AlbumsViewController: UIViewController {
     
     private func setupTableView() {
         albumTableView.dataSource = self
+        albumTableView.delegate = self
     }
     
     private func setupBackButton() {
@@ -69,7 +71,6 @@ extension AlbumsViewController: AlbumsViewProtocol {
         DispatchQueue.main.async {
             self.hideSpinner()
             self.setupErrorLabel(isHidden: true)
-            self.title = self.presenter?.getArtistName()
             self.albumTableView.reloadData()
         }
     }
@@ -92,3 +93,9 @@ extension AlbumsViewController: UITableViewDataSource {
     }
 }
 
+extension AlbumsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let albumSelected = presenter?.albumsArray[indexPath.row]
+        presenter?.navigateToSongsView(with: albumSelected)
+    }
+}

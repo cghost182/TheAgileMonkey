@@ -17,4 +17,5 @@ struct Song: Codable {
     let trackId: Int32?
     let trackName: String?
     let previewUrl: String?
+    let artworkUrl100: String?
 }
