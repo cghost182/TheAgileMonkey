@@ -18,6 +18,7 @@ class AudioManager: NSObject {
     }
     
     func playSound() {
+        NotificationCenter.default.post(name: .audioManagerStopPlaying, object: nil)
         player?.play()
     }
     

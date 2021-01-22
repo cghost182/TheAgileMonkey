@@ -14,8 +14,10 @@ struct SongResponse: Codable {
 
 struct Song: Codable {
     let wrapperType: String?
+    let kind: String?
     let trackId: Int32?
     let trackName: String?
     let previewUrl: String?
+    let trackViewUrl: String?
     let artworkUrl100: String?
 }

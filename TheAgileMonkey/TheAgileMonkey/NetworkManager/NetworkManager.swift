@@ -93,7 +93,8 @@ final class NetworkManager: NetworkManagerInput {
             return
         }
         
-        let request: URLRequest = URLRequest(url: url)
+        var request: URLRequest = URLRequest(url: url)
+        request.cachePolicy = .useProtocolCachePolicy
         
         URLSession.shared.dataTask(with: request) { [weak self] (data, _, error) in
             if let error = error {

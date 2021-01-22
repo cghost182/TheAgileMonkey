@@ -6,7 +6,15 @@
 //
 
 import UIKit
+import CoreData
 
+protocol SongsCollectionViewCellDelegate: class {
+    func favoriteIconTapped(with songId: Int32?)
+}
+
+private struct Constants {
+    static let musicVideoType = "music-video"
+}
 
 class SongsCollectionViewCell: UICollectionViewCell {
     
@@ -16,12 +24,14 @@ class SongsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var songimageView: UIImageView!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var playVideoButton: UIButton!
     @IBOutlet weak var likeButtonWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     //MARK: - Properties
-    
+    weak var delegate: SongsCollectionViewCellDelegate?
     var audioURLString: String?
+    var videoURLString: String?
     var likedSong: Bool = false
     var songDownloaded = false
     var isPlayingAudio: Bool? {
@@ -30,15 +40,50 @@ class SongsCollectionViewCell: UICollectionViewCell {
         }
     }
     let audioManager = AudioManager.shared
+    var songId: Int32?
     
-    func configure(with song: Song?) {
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        resetView()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        resetView()
+    }
+    
+    private func resetView() {
+        likedSong = false
+        songDownloaded = false
+        likeButton.setImage(UIImage(systemName: "suit.heart"), for: .normal)
+        playVideoButton.isHidden = true
+    }
+    
+    func configure(with song: Song?, isLiked: Bool) {
         guard let song = song else { return }
         
+        self.songId = song.trackId
+        likedSong = isLiked
         songNameLabel.text = song.trackName
-        audioURLString = song.previewUrl
         loadImage(url: song.artworkUrl100)
         hideActivityIndicator()
         subscribeForNotifications()
+        setLikeIcon()
+        setMediaIcons(for: song)
+    }
+    
+    private func setMediaIcons(for song: Song) {
+        if let kind = song.kind,
+           kind == Constants.musicVideoType,
+           let audioUrl = song.trackViewUrl,
+           let videoUrl = song.previewUrl {
+            audioURLString = audioUrl
+            videoURLString = videoUrl
+            playVideoButton.isHidden = false
+        } else {
+            audioURLString = song.previewUrl
+            playVideoButton.isHidden = true
+        }
     }
     
     private func subscribeForNotifications() {
@@ -77,7 +122,6 @@ class SongsCollectionViewCell: UICollectionViewCell {
             self.activityIndicator.isHidden = false
             self.activityIndicator.startAnimating()
         }
-        
     }
     
     func hideActivityIndicator() {
@@ -88,35 +132,43 @@ class SongsCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    @objc func stopPlaying() {
-        self.isPlayingAudio = false
-    }
-    
-    //MARK: - Actions
-    
-    @IBAction func likeButtonTapped(_ sender: Any) {
+    private func setLikeIcon() {
+        
         DispatchQueue.main.async {
             if self.likedSong {
-                UIView.animate(withDuration: 2.0) {
-                    self.likeButtonWidthConstraint.constant = 0
-                } completion: { (finished) in
-                    self.likeButton.setImage(UIImage(systemName: "suit.heart"), for: .normal)
-                    self.likeButtonWidthConstraint.constant = 21
-                }
-            } else {
                 UIView.animate(withDuration: 2.0) {
                     self.likeButtonWidthConstraint.constant = 0
                 } completion: { (finished) in
                     self.likeButton.setImage(UIImage(systemName: "suit.heart.fill"), for: .normal)
                     self.likeButtonWidthConstraint.constant = 21
                 }
+            } else {
+                UIView.animate(withDuration: 2.0) {
+                    self.likeButtonWidthConstraint.constant = 0
+                } completion: { (finished) in
+                    self.likeButton.setImage(UIImage(systemName: "suit.heart"), for: .normal)
+                    self.likeButtonWidthConstraint.constant = 21
+                    
+                }
             }
-            self.likedSong = !self.likedSong
         }
+        
+    }
+    
+    @objc func stopPlaying() {
+        self.isPlayingAudio = false
+        self.songDownloaded = false
+    }
+    
+    //MARK: - Actions
+    @IBAction func likeButtonTapped(_ sender: Any) {
+        self.likedSong = !self.likedSong
+        self.delegate?.favoriteIconTapped(with: self.songId)
+        setLikeIcon()
     }
     
     @IBAction func playButtonTapped(_ sender: Any) {
-        if !songDownloaded {
+        if !songDownloaded && !(isPlayingAudio ?? false) {
             showActivityIndicator()
             audioManager.downloadFileFromURL(audioURLString) { [weak self] isSongDownloaded in
                 self?.isPlayingAudio = isSongDownloaded
@@ -133,6 +185,9 @@ class SongsCollectionViewCell: UICollectionViewCell {
             audioManager.playSound()
             self.isPlayingAudio = true
         }
+    }
+    
+    @IBAction func playVideoButtonTapped(_ sender: Any) {
     }
 }
 

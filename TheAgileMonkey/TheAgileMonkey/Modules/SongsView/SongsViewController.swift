@@ -4,6 +4,7 @@ import UIKit
 private struct Constants {
     static let songsCellReusableIdentifier = "SongCellId"
 }
+
 protocol SongsViewProtocol: class {
     func refreshSongsList()
     func showError()
@@ -46,7 +47,6 @@ class SongsViewController: UIViewController {
     }
     
     private func setupCollectionView() {
-        songsCollectionView.delegate = self
         songsCollectionView.dataSource = self
     }
     
@@ -88,10 +88,6 @@ extension SongsViewController: SongsViewProtocol {
     }
 }
 
-extension SongsViewController: UICollectionViewDelegate {
-    
-}
-
 extension SongsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return presenter?.songsArray.count ?? 0
@@ -100,7 +96,26 @@ extension SongsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let song = presenter?.songsArray[indexPath.row]
         let cell = songsCollectionView.dequeueReusableCell(withReuseIdentifier: Constants.songsCellReusableIdentifier, for: indexPath) as! SongsCollectionViewCell
-        cell.configure(with: song)
+        var isFavorite = false
+        
+        if let song = song,
+           let songId = song.trackId {
+            
+            isFavorite = presenter?.isLikedSong(songId: songId) ?? false
+        }
+        
+        cell.configure(with: song, isLiked: isFavorite)
+        cell.delegate = self
         return cell
+    }
+}
+
+extension SongsViewController: SongsCollectionViewCellDelegate {
+    func favoriteIconTapped(with songId: Int32?) {
+        guard let songId = songId else {
+            return
+        }
+        
+        presenter?.handleFavoriteButtonTapped(songId: songId)
     }
 }

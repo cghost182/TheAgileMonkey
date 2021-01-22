@@ -57,24 +57,6 @@
                                                                 <action selector="likeButtonTapped:" destination="wQL-g6-551" eventType="touchUpInside" id="P3H-c8-Wwn"/>
                                                             </connections>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p9J-Pf-Rmb" userLabel="PlayButton">
-                                                            <rect key="frame" x="0.0" y="147" width="110" height="30"/>
-                                                            <color key="backgroundColor" red="0.70939928760000004" green="0.43151917049999999" blue="0.12806995030000001" alpha="0.43816021126760563" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="30" id="ger-K6-NvK"/>
-                                                            </constraints>
-                                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <state key="normal" image="play.fill" catalog="system"/>
-                                                            <connections>
-                                                                <action selector="playButtonTapped:" destination="wQL-g6-551" eventType="touchUpInside" id="azd-iQ-cVt"/>
-                                                            </connections>
-                                                        </button>
-                                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="uDI-1e-uy8">
-                                                            <rect key="frame" x="0.0" y="147" width="110" height="30"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="30" id="Ct2-Ug-1sY"/>
-                                                            </constraints>
-                                                        </activityIndicatorView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="Uq0-sN-Qbi">
                                                             <rect key="frame" x="5" y="37" width="100" height="100"/>
                                                             <constraints>
@@ -85,19 +67,55 @@
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rQL-hd-i9C">
+                                                            <rect key="frame" x="0.0" y="147" width="110" height="30"/>
+                                                            <subviews>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p9J-Pf-Rmb" userLabel="PlayButton">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="55" height="30"/>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="30" id="ger-K6-NvK"/>
+                                                                    </constraints>
+                                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <state key="normal" image="play.fill" catalog="system"/>
+                                                                    <connections>
+                                                                        <action selector="playButtonTapped:" destination="wQL-g6-551" eventType="touchUpInside" id="azd-iQ-cVt"/>
+                                                                    </connections>
+                                                                </button>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pgd-eZ-jrs" userLabel="videoButton">
+                                                                    <rect key="frame" x="55" y="0.0" width="55" height="30"/>
+                                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <state key="normal" image="video.fill" catalog="system"/>
+                                                                    <connections>
+                                                                        <action selector="playVideoButtonTapped:" destination="wQL-g6-551" eventType="touchUpInside" id="mI3-ij-yhC"/>
+                                                                    </connections>
+                                                                </button>
+                                                            </subviews>
+                                                            <color key="backgroundColor" red="0.70939928760000004" green="0.43151917049999999" blue="0.12806995030000001" alpha="0.43816021129999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="30" id="p4u-ZL-HGx"/>
+                                                                <constraint firstItem="Pgd-eZ-jrs" firstAttribute="width" secondItem="p9J-Pf-Rmb" secondAttribute="width" id="vIk-L9-zSg"/>
+                                                            </constraints>
+                                                        </stackView>
+                                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="uDI-1e-uy8">
+                                                            <rect key="frame" x="0.0" y="147" width="110" height="30"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="30" id="Ct2-Ug-1sY"/>
+                                                            </constraints>
+                                                        </activityIndicatorView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.643705985915493" alpha="0.89543904049295775" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstItem="p9J-Pf-Rmb" firstAttribute="bottom" secondItem="uDI-1e-uy8" secondAttribute="bottom" id="0eI-c4-Hru"/>
+                                                        <constraint firstItem="uDI-1e-uy8" firstAttribute="bottom" secondItem="rQL-hd-i9C" secondAttribute="bottom" id="4nO-Ac-EcB"/>
                                                         <constraint firstItem="Uq0-sN-Qbi" firstAttribute="top" secondItem="3Rh-dI-D6x" secondAttribute="bottom" constant="10" id="79d-TY-qkv"/>
                                                         <constraint firstAttribute="trailing" secondItem="uDI-1e-uy8" secondAttribute="trailing" id="87u-kA-Ywn"/>
+                                                        <constraint firstAttribute="trailing" secondItem="rQL-hd-i9C" secondAttribute="trailing" id="Ame-7U-PPp"/>
                                                         <constraint firstAttribute="trailing" secondItem="Uq0-sN-Qbi" secondAttribute="trailing" constant="5" id="BSk-sz-kMB"/>
-                                                        <constraint firstItem="p9J-Pf-Rmb" firstAttribute="top" secondItem="Uq0-sN-Qbi" secondAttribute="bottom" constant="10" id="Cgy-GH-s5D"/>
-                                                        <constraint firstAttribute="trailing" secondItem="p9J-Pf-Rmb" secondAttribute="trailing" id="Fg3-Gm-oej"/>
-                                                        <constraint firstItem="p9J-Pf-Rmb" firstAttribute="leading" secondItem="TgG-eI-vSD" secondAttribute="leading" id="LEW-CH-qqT"/>
-                                                        <constraint firstAttribute="bottom" secondItem="p9J-Pf-Rmb" secondAttribute="bottom" id="Yfk-2h-KZy"/>
+                                                        <constraint firstAttribute="bottom" secondItem="rQL-hd-i9C" secondAttribute="bottom" id="LYr-Iw-QGQ"/>
+                                                        <constraint firstItem="rQL-hd-i9C" firstAttribute="leading" secondItem="TgG-eI-vSD" secondAttribute="leading" id="cMj-sW-inT"/>
                                                         <constraint firstItem="3Rh-dI-D6x" firstAttribute="top" secondItem="TgG-eI-vSD" secondAttribute="top" constant="5" id="ixm-JJ-Ssr"/>
                                                         <constraint firstAttribute="trailing" secondItem="3Rh-dI-D6x" secondAttribute="trailing" constant="5" id="liS-Ew-gUs"/>
+                                                        <constraint firstItem="rQL-hd-i9C" firstAttribute="top" secondItem="Uq0-sN-Qbi" secondAttribute="bottom" constant="10" id="pYR-nC-gXo"/>
                                                         <constraint firstItem="Uq0-sN-Qbi" firstAttribute="leading" secondItem="TgG-eI-vSD" secondAttribute="leading" constant="5" id="v5r-8g-NwC"/>
                                                         <constraint firstItem="uDI-1e-uy8" firstAttribute="leading" secondItem="TgG-eI-vSD" secondAttribute="leading" id="zp4-qI-tvv"/>
                                                     </constraints>
@@ -119,6 +137,7 @@
                                             <outlet property="likeButton" destination="3Rh-dI-D6x" id="saN-AT-pEi"/>
                                             <outlet property="likeButtonWidthConstraint" destination="hUo-Dc-JIY" id="vaX-Fl-IMq"/>
                                             <outlet property="playButton" destination="p9J-Pf-Rmb" id="Hzl-Jp-clE"/>
+                                            <outlet property="playVideoButton" destination="Pgd-eZ-jrs" id="MQP-uP-Hcb"/>
                                             <outlet property="songNameLabel" destination="Uq0-sN-Qbi" id="KJ8-qE-xOk"/>
                                             <outlet property="songimageView" destination="bQb-pf-cNm" id="QES-8V-8Rd"/>
                                             <outlet property="songsContentView" destination="il7-f3-I5z" id="TPh-4Q-lqy"/>
@@ -158,6 +177,7 @@
     <resources>
         <image name="play.fill" catalog="system" width="116" height="128"/>
         <image name="suit.heart" catalog="system" width="128" height="109"/>
+        <image name="video.fill" catalog="system" width="128" height="82"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

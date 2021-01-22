@@ -21,8 +21,14 @@ class SongsWireframe {
         
         // create/access additional/shared objects
         let networkManager = NetworkManager.shared
+        var appDelegate: AppDelegate?
+        if let _appDelegate = UIApplication.shared.delegate as? AppDelegate {
+            appDelegate = _appDelegate
+        }
+        
         // wire in shared object dependencies
         interactor.networkManager = networkManager
+        interactor.appDelegate = appDelegate
         
         // wire in module dependencies
         wireframe.viewController = view
