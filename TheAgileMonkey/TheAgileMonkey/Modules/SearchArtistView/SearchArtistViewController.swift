@@ -32,12 +32,6 @@ class SearchArtistViewController: UIViewController {
         configureView()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        presenter?.updateView()
-    }
-    
     private func configureView() {
         title = Constants.title
         emptyListLabel.isHidden = false
@@ -73,7 +67,6 @@ extension SearchArtistViewController: SearchArtistViewProtocol {
             self.emptyListLabel.isHidden = hasResults
             self.artistsTable.isHidden = !hasResults
             self.artistsTable.reloadData()
-            
         }
     }
     

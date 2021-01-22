@@ -8,11 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		643F949B25B7DFD500945234 /* SongsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643F949A25B7DFD500945234 /* SongsCollectionViewCell.swift */; };
+		643F94F525BA3D3300945234 /* SearchArtistInteractorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643F94F425BA3D3300945234 /* SearchArtistInteractorMock.swift */; };
+		643F94FD25BA3DB500945234 /* SearchArtistViewControllerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643F94FC25BA3DB500945234 /* SearchArtistViewControllerMock.swift */; };
+		643F950225BA3E1E00945234 /* SearchArtistWireframeMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643F950125BA3E1E00945234 /* SearchArtistWireframeMock.swift */; };
+		643F950725BA727300945234 /* SearchArtistsInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643F950625BA727300945234 /* SearchArtistsInteractorTests.swift */; };
+		643F950C25BA72F500945234 /* SearchArtistPresenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643F950B25BA72F500945234 /* SearchArtistPresenterMock.swift */; };
+		643F951125BA73D100945234 /* NetworkManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643F951025BA73D100945234 /* NetworkManagerMock.swift */; };
 		647E979425B28E00007F6586 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647E979325B28E00007F6586 /* AppDelegate.swift */; };
 		647E979625B28E00007F6586 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647E979525B28E00007F6586 /* SceneDelegate.swift */; };
 		647E979D25B28E02007F6586 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 647E979C25B28E02007F6586 /* Assets.xcassets */; };
 		647E97A025B28E02007F6586 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 647E979E25B28E02007F6586 /* LaunchScreen.storyboard */; };
-		647E97AB25B28E03007F6586 /* TheAgileMonkeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647E97AA25B28E03007F6586 /* TheAgileMonkeyTests.swift */; };
+		647E97AB25B28E03007F6586 /* SearchArtistsPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647E97AA25B28E03007F6586 /* SearchArtistsPresenterTests.swift */; };
 		647E97B625B28E03007F6586 /* TheAgileMonkeyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647E97B525B28E03007F6586 /* TheAgileMonkeyUITests.swift */; };
 		647E97CC25B28ED8007F6586 /* SearchArtist.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 647E97C725B28ED8007F6586 /* SearchArtist.storyboard */; };
 		647E97CD25B28ED8007F6586 /* SearchArtistPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647E97C825B28ED8007F6586 /* SearchArtistPresenter.swift */; };
@@ -59,6 +65,12 @@
 
 /* Begin PBXFileReference section */
 		643F949A25B7DFD500945234 /* SongsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongsCollectionViewCell.swift; sourceTree = "<group>"; };
+		643F94F425BA3D3300945234 /* SearchArtistInteractorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArtistInteractorMock.swift; sourceTree = "<group>"; };
+		643F94FC25BA3DB500945234 /* SearchArtistViewControllerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArtistViewControllerMock.swift; sourceTree = "<group>"; };
+		643F950125BA3E1E00945234 /* SearchArtistWireframeMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArtistWireframeMock.swift; sourceTree = "<group>"; };
+		643F950625BA727300945234 /* SearchArtistsInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArtistsInteractorTests.swift; sourceTree = "<group>"; };
+		643F950B25BA72F500945234 /* SearchArtistPresenterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArtistPresenterMock.swift; sourceTree = "<group>"; };
+		643F951025BA73D100945234 /* NetworkManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerMock.swift; sourceTree = "<group>"; };
 		647E979025B28E00007F6586 /* TheAgileMonkey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheAgileMonkey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		647E979325B28E00007F6586 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		647E979525B28E00007F6586 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -66,7 +78,7 @@
 		647E979F25B28E02007F6586 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		647E97A125B28E02007F6586 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		647E97A625B28E03007F6586 /* TheAgileMonkeyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheAgileMonkeyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		647E97AA25B28E03007F6586 /* TheAgileMonkeyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheAgileMonkeyTests.swift; sourceTree = "<group>"; };
+		647E97AA25B28E03007F6586 /* SearchArtistsPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArtistsPresenterTests.swift; sourceTree = "<group>"; };
 		647E97AC25B28E03007F6586 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		647E97B125B28E03007F6586 /* TheAgileMonkeyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheAgileMonkeyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		647E97B525B28E03007F6586 /* TheAgileMonkeyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheAgileMonkeyUITests.swift; sourceTree = "<group>"; };
@@ -146,6 +158,28 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		643F94EF25BA3CA900945234 /* SearchArtistsTests */ = {
+			isa = PBXGroup;
+			children = (
+				643F94F325BA3D1600945234 /* Mocks */,
+				647E97AA25B28E03007F6586 /* SearchArtistsPresenterTests.swift */,
+				643F950625BA727300945234 /* SearchArtistsInteractorTests.swift */,
+			);
+			path = SearchArtistsTests;
+			sourceTree = "<group>";
+		};
+		643F94F325BA3D1600945234 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				643F94F425BA3D3300945234 /* SearchArtistInteractorMock.swift */,
+				643F94FC25BA3DB500945234 /* SearchArtistViewControllerMock.swift */,
+				643F950125BA3E1E00945234 /* SearchArtistWireframeMock.swift */,
+				643F950B25BA72F500945234 /* SearchArtistPresenterMock.swift */,
+				643F951025BA73D100945234 /* NetworkManagerMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		647E978725B28E00007F6586 = {
 			isa = PBXGroup;
 			children = (
@@ -184,7 +218,7 @@
 		647E97A925B28E03007F6586 /* TheAgileMonkeyTests */ = {
 			isa = PBXGroup;
 			children = (
-				647E97AA25B28E03007F6586 /* TheAgileMonkeyTests.swift */,
+				643F94EF25BA3CA900945234 /* SearchArtistsTests */,
 				647E97AC25B28E03007F6586 /* Info.plist */,
 			);
 			path = TheAgileMonkeyTests;
@@ -456,7 +490,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				647E97AB25B28E03007F6586 /* TheAgileMonkeyTests.swift in Sources */,
+				643F94F525BA3D3300945234 /* SearchArtistInteractorMock.swift in Sources */,
+				643F951125BA73D100945234 /* NetworkManagerMock.swift in Sources */,
+				643F950725BA727300945234 /* SearchArtistsInteractorTests.swift in Sources */,
+				647E97AB25B28E03007F6586 /* SearchArtistsPresenterTests.swift in Sources */,
+				643F950C25BA72F500945234 /* SearchArtistPresenterMock.swift in Sources */,
+				643F94FD25BA3DB500945234 /* SearchArtistViewControllerMock.swift in Sources */,
+				643F950225BA3E1E00945234 /* SearchArtistWireframeMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

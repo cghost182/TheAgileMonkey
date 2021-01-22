@@ -2,7 +2,6 @@ import Foundation
 
 protocol SearchArtistPresenterInput: class {
     var artistList: [Artist] { get }
-    func updateView()
     func searchArtistByName(_ name: String)
     func resetArtistList()
     func loadMoreArtists()
@@ -17,10 +16,6 @@ class SearchArtistPresenter: SearchArtistPresenterInput {
     private var searchText = ""
     private var page = 0
     weak var view: SearchArtistViewProtocol?
-    
-    func updateView() {
-        
-    }
     
     func searchArtistByName(_ name: String) {
         searchText = name
