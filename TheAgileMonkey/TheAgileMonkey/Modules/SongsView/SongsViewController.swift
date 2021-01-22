@@ -32,6 +32,12 @@ class SongsViewController: UIViewController {
         showSpinner()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        AudioManager.shared.stopSound()
+    }
+    
     private func configureView() {
         title = presenter?.getAlbumName()
         setupCollectionView()

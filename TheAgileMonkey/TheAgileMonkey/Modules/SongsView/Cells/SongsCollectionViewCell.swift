@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import AVFoundation
+
 
 class SongsCollectionViewCell: UICollectionViewCell {
     
@@ -20,14 +20,16 @@ class SongsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     //MARK: - Properties
-    var player: AVAudioPlayer?
+    
     var audioURLString: String?
     var likedSong: Bool = false
+    var songDownloaded = false
     var isPlayingAudio: Bool? {
         didSet {
             togglePlayIcon()
         }
     }
+    let audioManager = AudioManager.shared
     
     func configure(with song: Song?) {
         guard let song = song else { return }
@@ -36,6 +38,11 @@ class SongsCollectionViewCell: UICollectionViewCell {
         audioURLString = song.previewUrl
         loadImage(url: song.artworkUrl100)
         hideActivityIndicator()
+        subscribeForNotifications()
+    }
+    
+    private func subscribeForNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(stopPlaying), name: .audioManagerStopPlaying, object: nil)
     }
     
     private func loadImage(url: String?) {
@@ -64,36 +71,6 @@ class SongsCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func playSound(with url: URL) {
-        do {
-            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
-            try AVAudioSession.sharedInstance().setActive(true)
-
-            player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp4.rawValue)
-
-            guard let player = player else { return }
-
-            player.play()
-            player.delegate = self
-            isPlayingAudio = true
-
-        } catch let error {
-            print(error.localizedDescription)
-        }
-    }
-
-    func downloadFileFromURL(){
-        guard let urlString = audioURLString,
-              let url = URL(string: urlString) else { return }
-        
-        var downloadTask:URLSessionDownloadTask
-        downloadTask = URLSession.shared.downloadTask(with: url) { (url, response, error) in
-            self.playSound(with: url!)
-            self.hideActivityIndicator()
-        }
-        downloadTask.resume()
-    }
-    
     func showActivityIndicator() {
         DispatchQueue.main.async {
             self.playButton.isHidden = true
@@ -109,6 +86,10 @@ class SongsCollectionViewCell: UICollectionViewCell {
             self.activityIndicator.isHidden = true
             self.activityIndicator.stopAnimating()
         }
+    }
+    
+    @objc func stopPlaying() {
+        self.isPlayingAudio = false
     }
     
     //MARK: - Actions
@@ -135,28 +116,24 @@ class SongsCollectionViewCell: UICollectionViewCell {
     }
     
     @IBAction func playButtonTapped(_ sender: Any) {
-        guard let isPlayingAudio = isPlayingAudio else {
+        if !songDownloaded {
             showActivityIndicator()
-            downloadFileFromURL()
+            audioManager.downloadFileFromURL(audioURLString) { [weak self] isSongDownloaded in
+                self?.isPlayingAudio = isSongDownloaded
+                self?.songDownloaded = isSongDownloaded
+                self?.hideActivityIndicator()
+            }
             return
         }
         
-        if isPlayingAudio {
-            player?.stop()
+        if isPlayingAudio ?? false {
+            audioManager.stopSound()
             self.isPlayingAudio = false
         } else {
-            player?.play()
+            audioManager.playSound()
             self.isPlayingAudio = true
         }
     }
 }
 
-extension SongsCollectionViewCell: AVAudioPlayerDelegate {
 
-    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        if flag {
-            self.player?.stop()
-            self.isPlayingAudio = false
-        }
-    }
-}
