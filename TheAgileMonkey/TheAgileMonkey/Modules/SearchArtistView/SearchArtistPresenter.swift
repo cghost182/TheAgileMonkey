@@ -41,16 +41,21 @@ class SearchArtistPresenter: SearchArtistPresenterInput {
 
 extension SearchArtistPresenter: SearchArtistInteractorOutput {
     func artistsFetched(_ artistListFetched: [Artist]?) {
+        
         guard let artistListFetched = artistListFetched,
               artistListFetched.count > 0 else {
-            view?.showError()
+            
+            if page == 0 {
+                view?.showError()
+            }
+            
             return
         }
         
         if page == 0 {
-            self.artistList = artistListFetched
+            artistList = artistListFetched
         } else {
-            self.artistList += artistListFetched
+            artistList += artistListFetched
         }
         
         view?.showResults()

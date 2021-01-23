@@ -18,11 +18,7 @@ class SearchArtistInteractor: SearchArtistInteractorInput {
         networkManager?.findArtists(page: page, name: name, completion: { [weak self] (data) in
             do {
                 let artistsResponse = try JSONDecoder().decode(ArtistResponse.self, from: data)
-                if let results = artistsResponse.results, results.count > 0 {
-                    self?.output?.artistsFetched(results)
-                } else {
-                    self?.output?.artistNotFound()
-                }
+                self?.output?.artistsFetched(artistsResponse.results)
             } catch let error {
                 self?.output?.artistNotFound()
                 print(error.localizedDescription)
