@@ -188,6 +188,7 @@ class SongsCollectionViewCell: UICollectionViewCell {
     }
     
     @IBAction func playVideoButtonTapped(_ sender: Any) {
+        VideoManager.shared.playVideoURL(videoURLString)
     }
 }
 
