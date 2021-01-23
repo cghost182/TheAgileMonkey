@@ -57,6 +57,8 @@ class SongsCollectionViewCell: UICollectionViewCell {
         songDownloaded = false
         likeButton.setImage(UIImage(systemName: "suit.heart"), for: .normal)
         playVideoButton.isHidden = true
+        audioURLString = nil
+        videoURLString = nil
     }
     
     func configure(with song: Song?, isLiked: Bool) {
@@ -75,13 +77,13 @@ class SongsCollectionViewCell: UICollectionViewCell {
     private func setMediaIcons(for song: Song) {
         if let kind = song.kind,
            kind == Constants.musicVideoType,
-           let audioUrl = song.trackViewUrl,
            let videoUrl = song.previewUrl {
-            audioURLString = audioUrl
             videoURLString = videoUrl
+            playButton.isHidden = true
             playVideoButton.isHidden = false
         } else {
             audioURLString = song.previewUrl
+            playButton.isHidden = false
             playVideoButton.isHidden = true
         }
     }
@@ -118,7 +120,10 @@ class SongsCollectionViewCell: UICollectionViewCell {
     
     func showActivityIndicator() {
         DispatchQueue.main.async {
-            self.playButton.isHidden = true
+            if let _ = self.audioURLString {
+                self.playButton.isHidden = true
+            }
+            
             self.activityIndicator.isHidden = false
             self.activityIndicator.startAnimating()
         }
@@ -126,14 +131,15 @@ class SongsCollectionViewCell: UICollectionViewCell {
     
     func hideActivityIndicator() {
         DispatchQueue.main.async {
-            self.playButton.isHidden = false
+            if let _ = self.audioURLString {
+                self.playButton.isHidden = false
+            }
             self.activityIndicator.isHidden = true
             self.activityIndicator.stopAnimating()
         }
     }
     
     private func setLikeIcon() {
-        
         DispatchQueue.main.async {
             if self.likedSong {
                 UIView.animate(withDuration: 2.0) {
@@ -152,18 +158,18 @@ class SongsCollectionViewCell: UICollectionViewCell {
                 }
             }
         }
-        
     }
     
     @objc func stopPlaying() {
-        self.isPlayingAudio = false
-        self.songDownloaded = false
+        audioManager.stopSound()
+        isPlayingAudio = false
+        songDownloaded = false
     }
     
     //MARK: - Actions
     @IBAction func likeButtonTapped(_ sender: Any) {
-        self.likedSong = !self.likedSong
-        self.delegate?.favoriteIconTapped(with: self.songId)
+        likedSong = !likedSong
+        delegate?.favoriteIconTapped(with: self.songId)
         setLikeIcon()
     }
     
@@ -180,14 +186,15 @@ class SongsCollectionViewCell: UICollectionViewCell {
         
         if isPlayingAudio ?? false {
             audioManager.stopSound()
-            self.isPlayingAudio = false
+            isPlayingAudio = false
         } else {
             audioManager.playSound()
-            self.isPlayingAudio = true
+            isPlayingAudio = true
         }
     }
     
     @IBAction func playVideoButtonTapped(_ sender: Any) {
+        NotificationCenter.default.post(name: .audioManagerStopPlaying, object: nil)
         VideoManager.shared.playVideoURL(videoURLString)
     }
 }
