@@ -63,9 +63,9 @@ class SearchArtistsInteractorTests: XCTestCase {
         sut.searchArtistByName(name, page: page)
         
         //Then
-        XCTAssertTrue(presenter.artistNotFoundCalled)
+        XCTAssertTrue(presenter.artistsFetchedCalled)
         XCTAssertTrue(networkManager.findArtistsCalled)
-        XCTAssertNil(presenter.artistList)
+        XCTAssertNotNil(presenter.artistList)
     }
     
     func testSearchArtistByName_failWithInvalidJSON() {
