@@ -14,7 +14,7 @@ protocol SearchArtistViewProtocol: class {
     func showError()
 }
 
-class SearchArtistViewController: UIViewController {
+class SearchArtistViewController: UIViewController, Throttable {
     
     //MARK: - Outlets
     @IBOutlet weak var artistsTable: UITableView!
@@ -24,6 +24,14 @@ class SearchArtistViewController: UIViewController {
     var presenter: SearchArtistPresenterInput?
     var searchController = UISearchController(searchResultsController: nil)
     private var isLoading: Bool = false
+    private var searchText = ""
+    
+    lazy var performRequest = perform(with: 0.5) { [weak self] in
+        guard let self = self else { return }
+        
+        self.showSpinner()
+        self.presenter?.searchArtistByName(self.searchText)
+    }
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -118,6 +126,7 @@ extension SearchArtistViewController: UITableViewDelegate {
 }
 
 extension SearchArtistViewController: UISearchResultsUpdating {
+   
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text,
               !text.isEmpty,
@@ -126,9 +135,8 @@ extension SearchArtistViewController: UISearchResultsUpdating {
             presenter?.resetArtistList()
             return
         }
-        
-        showSpinner()
-        presenter?.searchArtistByName(text)
+        searchText = text
+        performRequest()
     }
     
 }

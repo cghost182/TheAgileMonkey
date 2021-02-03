@@ -2,7 +2,7 @@ import Foundation
 
 protocol SearchArtistPresenterInput: class {
     var artistList: [Artist] { get }
-    func searchArtistByName(_ name: String)
+    func searchArtistByName(_ name: String?)
     func resetArtistList()
     func loadMoreArtists()
     func navigateToAlbumsView(with artist: Artist?)
@@ -17,7 +17,8 @@ class SearchArtistPresenter: SearchArtistPresenterInput {
     private var page = 0
     weak var view: SearchArtistViewProtocol?
     
-    func searchArtistByName(_ name: String) {
+    func searchArtistByName(_ name: String?) {
+        guard let name = name, !name.isEmpty else { return }
         searchText = name
         page = 0
         interactor?.searchArtistByName(name, page: page)
