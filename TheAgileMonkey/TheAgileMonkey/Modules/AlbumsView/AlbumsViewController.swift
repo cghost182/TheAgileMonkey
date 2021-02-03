@@ -10,7 +10,7 @@ protocol AlbumsViewProtocol: class {
     func showError()
 }
 
-class AlbumsViewController: UIViewController {
+class AlbumsViewController: BaseViewController {
     
     //MARK: - Outlets
     @IBOutlet weak var albumTableView: UITableView!

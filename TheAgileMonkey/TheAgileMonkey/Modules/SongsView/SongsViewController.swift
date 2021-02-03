@@ -10,7 +10,7 @@ protocol SongsViewProtocol: class {
     func showError()
 }
 
-class SongsViewController: UIViewController {
+class SongsViewController: BaseViewController {
     
     //MARK: - Outlets
     @IBOutlet weak var songsCollectionView: UICollectionView!
