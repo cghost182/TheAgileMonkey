@@ -62,11 +62,11 @@ class SongsCollectionViewCell: UICollectionViewCell {
         songimageView.image = nil
     }
     
-    func configure(with song: Song?, isLiked: Bool) {
+    func configure(with song: Song?) {
         guard let song = song else { return }
         
         self.songId = song.trackId
-        likedSong = isLiked
+        likedSong = song.isFavorite ?? false
         songNameLabel.text = song.trackName
         loadImage(url: song.artworkUrl100)
         hideActivityIndicator()

@@ -5,7 +5,6 @@ protocol SongsPresenterInput: class {
     func updateView()
     func handleIncoming(album: Album?)
     func getAlbumName() -> String?
-    func isLikedSong(songId: Int32) -> Bool
     func handleFavoriteButtonTapped(songId: Int32)
 }
 
@@ -38,18 +37,25 @@ class SongsPresenter: SongsPresenterInput {
         return album?.collectionName
     }
     
-    func isLikedSong(songId: Int32) -> Bool {
-        return interactor?.isSongCurrentlyStored(songIdString: String(songId), deleteOccurrences: false) ?? false
-    }
-    
     func handleFavoriteButtonTapped(songId: Int32) {
         interactor?.handleFavoriteButtonTapped(songId: songId)
+    }
+    
+    private func isLikedSong(songId: Int32) -> Bool {
+        return interactor?.isSongCurrentlyStored(songIdString: String(songId), deleteOccurrences: false) ?? false
     }
 }
 
 extension SongsPresenter: SongsInteractorOutput {
     func songsFetched(with songs: [Song]) {
         songsArray = songs
+        
+        for (index, song) in songsArray.enumerated() {
+            if let trackId = song.trackId {
+                songsArray[index].isFavorite = isLikedSong(songId: trackId)
+            }
+        }
+        
         dispatchGroup.leave()
     }
     

@@ -96,15 +96,8 @@ extension SongsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let song = presenter?.songsArray[indexPath.row]
         let cell = songsCollectionView.dequeueReusableCell(withReuseIdentifier: Constants.songsCellReusableIdentifier, for: indexPath) as! SongsCollectionViewCell
-        var isFavorite = false
-        
-        if let song = song,
-           let songId = song.trackId {
-            
-            isFavorite = presenter?.isLikedSong(songId: songId) ?? false
-        }
-        
-        cell.configure(with: song, isLiked: isFavorite)
+
+        cell.configure(with: song)
         cell.delegate = self
         return cell
     }

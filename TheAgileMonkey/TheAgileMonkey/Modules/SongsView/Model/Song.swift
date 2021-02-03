@@ -20,4 +20,5 @@ struct Song: Codable {
     let previewUrl: String?
     let trackViewUrl: String?
     let artworkUrl100: String?
+    var isFavorite: Bool?
 }
