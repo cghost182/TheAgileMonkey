@@ -47,6 +47,7 @@ class SearchArtistViewController: UIViewController, Throttable {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.interactivePopGestureRecognizer?.delegate = nil
         viewIsAppearing = true
     }
     
