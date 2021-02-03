@@ -12,13 +12,26 @@ class AlbumTableViewCell: UITableViewCell {
     @IBOutlet weak var albumImageView: UIImageView!
     @IBOutlet weak var albumNameLabel: UILabel!
     @IBOutlet weak var releaseDateLabel: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     private var albumId: Int32?
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        resetView()
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        resetView()
+    }
+    
+    private func resetView() {
+        albumImageView.image = nil
+        albumNameLabel.text = ""
+        releaseDateLabel.text = ""
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
@@ -33,18 +46,14 @@ class AlbumTableViewCell: UITableViewCell {
     }
     
     private func loadImage(url: String?) {
-        guard let url = url,
-              let imageURL = URL(string: url) else { return }
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
         
-        DispatchQueue.global().async { [weak self] in
-            guard let imageData = try? Data(contentsOf: imageURL) else {
-                return
-            }
-                        
-            DispatchQueue.main.async {
-                let image = UIImage(data: imageData)
-                self?.albumImageView.image = image
-            }
+        ImageLoader.loadImage(url: url) { [weak self] (image) in
+            self?.activityIndicator.isHidden = true
+            self?.activityIndicator.stopAnimating()
+            self?.albumImageView.image = image
         }
     }
 }
+

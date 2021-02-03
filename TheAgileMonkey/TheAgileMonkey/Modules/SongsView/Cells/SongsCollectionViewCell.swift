@@ -59,6 +59,7 @@ class SongsCollectionViewCell: UICollectionViewCell {
         playVideoButton.isHidden = true
         audioURLString = nil
         videoURLString = nil
+        songimageView.image = nil
     }
     
     func configure(with song: Song?, isLiked: Bool) {
