@@ -11,7 +11,7 @@ typealias responseCompletionType = (_ :Data)->()
 protocol NetworkManagerInput: class {
     func findArtists(page: Int, name: String, completion: @escaping responseCompletionType)
     func findAlbums(artistId: Int32, completion: @escaping responseCompletionType)
-    func findSongs(page: Int, albumId: Int32, completion: @escaping responseCompletionType)
+    func findSongs(albumId: Int32, completion: @escaping responseCompletionType)
 }
 
 final class NetworkManager: NetworkManagerInput {
@@ -55,12 +55,10 @@ final class NetworkManager: NetworkManagerInput {
         }
     }
     
-    func findSongs(page: Int, albumId: Int32, completion: @escaping responseCompletionType) {
+    func findSongs(albumId: Int32, completion: @escaping responseCompletionType) {
         let path = "lookup"
         let parameters = [
             "id": "\(albumId)",
-            "limit": "\(pageSize)",
-            "offset": "\(page*20)",
             "entity": "song"
         ]
         

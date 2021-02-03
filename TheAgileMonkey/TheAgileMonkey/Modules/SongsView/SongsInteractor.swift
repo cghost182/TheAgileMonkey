@@ -30,7 +30,7 @@ class SongsInteractor: SongsInteractorInput {
         guard let album = album,
               let albumId = album.collectionId else { return }
         
-        networkManager?.findSongs(page: 0, albumId: albumId, completion: { [weak self] (data) in
+        networkManager?.findSongs(albumId: albumId, completion: { [weak self] (data) in
             do {
                 let artistsResponse = try JSONDecoder().decode(SongResponse.self, from: data)
                 if let responseCount = artistsResponse.resultCount, responseCount > 0 {
