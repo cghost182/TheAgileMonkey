@@ -25,5 +25,6 @@ class ArtistTableViewCell: UITableViewCell {
         guard let artist = artist else { return }
         artistName.text = artist.artistName
         artistGenre.text = artist.primaryGenreName ?? "-"
+        selectionStyle = .none
     }
 }

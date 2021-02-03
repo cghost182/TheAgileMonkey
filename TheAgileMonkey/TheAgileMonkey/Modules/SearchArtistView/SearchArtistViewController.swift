@@ -25,6 +25,7 @@ class SearchArtistViewController: UIViewController, Throttable {
     var searchController = UISearchController(searchResultsController: nil)
     private var isLoading: Bool = false
     private var searchText = ""
+    private var viewIsAppearing = false
     
     lazy var performRequest = perform(with: 0.5) { [weak self] in
         guard let self = self else { return }
@@ -33,11 +34,20 @@ class SearchArtistViewController: UIViewController, Throttable {
         self.presenter?.searchArtistByName(self.searchText)
     }
     
+    lazy var cancelPreviousRequest = perform(with: 0.5) { [weak self] in
+        self?.presenter?.resetArtistList()
+    }
+    
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewIsAppearing = true
     }
     
     private func configureView() {
@@ -128,13 +138,19 @@ extension SearchArtistViewController: UITableViewDelegate {
 extension SearchArtistViewController: UISearchResultsUpdating {
    
     func updateSearchResults(for searchController: UISearchController) {
+        if viewIsAppearing {
+            viewIsAppearing = false
+            return
+        }
+        
         guard let text = searchController.searchBar.text,
               !text.isEmpty,
               text.count > 1 else {
             
-            presenter?.resetArtistList()
+            cancelPreviousRequest()
             return
         }
+        
         searchText = text
         performRequest()
     }
